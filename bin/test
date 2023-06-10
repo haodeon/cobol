@@ -38,6 +38,14 @@ function verify_exercise() {
     mv "${stub_backup_file}" "${stub_file}"
 }
 
+exit_code=0
+
+# test one practice exercise
+if [[ $# -gt 0 && -d ./exercises/practice/$1 ]]; then
+    verify_exercise "./exercises/practice/$1"
+    exit "${exit_code}"
+fi
+
 # Verify the Concept Exercises
 for concept_exercise_dir in ./exercises/concept/*/; do
     if [ -d $concept_exercise_dir ]; then
@@ -54,4 +62,4 @@ for practice_exercise_dir in ./exercises/practice/*/; do
     fi
 done
 
-exit ${exit_code}
+exit "${exit_code}"
